@@ -112,19 +112,25 @@ namespace TalentAtm
                                     {
                                         case 1:
                                             Utility.PrintMessage("You have succesfully logout. Please collect your ATM card..", true);
+                                         
                                             break;
                                         case 2:
                                             Utility.PrintMessage("ipugo nke oma, nwere atm cardi gi", true);
+                                            
                                             break;
                                         case 3:
                                             Utility.PrintMessage("oga you don commot, abeg collect your card", true);
+                                            
                                             break;
                                         default:
                                             Utility.PrintMessage("You have succesfully logout. Please collect your ATM card..", true);
+                                            
                                             break;
 
 
                                     }
+
+                                    Environment.Exit(0);
 
                                     break;
 
