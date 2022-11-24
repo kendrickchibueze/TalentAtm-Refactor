@@ -8,6 +8,6 @@ namespace TalentAtm
 {
     internal interface IDeposit
     {
-        void CheckBalance(BankAccount bankAccount);
+        void DepositMoney(BankAccount bankAccount);
     }
 }

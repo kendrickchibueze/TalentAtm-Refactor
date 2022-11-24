@@ -8,6 +8,7 @@ namespace TalentAtm
 {
     internal interface ILoginUser
     {
-        void CheckBalance(BankAccount bankAccount);
+        
+        void verifyCardNumberPassword();
     }
 }

@@ -8,6 +8,7 @@ namespace TalentAtm
 {
     internal interface IWithdrawal
     {
-        void CheckBalance(BankAccount bankAccount);
+        
+        void MakeWithdrawal(BankAccount bankAccount);
     }
 }
