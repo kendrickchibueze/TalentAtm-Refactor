@@ -9,8 +9,10 @@ using System.Transactions;
 
 namespace TalentAtm
 {
-    //implementing multiple inheritance through interfaces
-    internal class Atm : ILoginUser, IBalance, IDeposit, IWithdrawal, ITransfer, ITransaction
+
+     public delegate void BankAccountHandler(BankAccount account);
+    
+    internal class Atm 
     {
         private static int _tries;
 
@@ -29,6 +31,12 @@ namespace TalentAtm
         private static BankAccount _selectedAccount;
 
         private static BankAccount _inputAccount;
+
+
+
+        
+
+        public event BankAccountHandler bankAccountExist;
 
 
 
@@ -218,7 +226,9 @@ namespace TalentAtm
         {
             while (!_passverification)
             {
-                _inputAccount = new BankAccount();
+                //_inputAccount = new BankAccount();
+                bankAccountExist(new BankAccount());
+
                 switch (LangChoice._choice)
                 {
                     case 1:
@@ -243,7 +253,7 @@ namespace TalentAtm
                 }
          
 
-                _inputAccount.PinCode = int.Parse(Console.ReadLine());
+                bankAccountExist.PinCode = int.Parse(Console.ReadLine());
 
                 switch (LangChoice._choice)
                 {
@@ -272,11 +282,11 @@ namespace TalentAtm
 
                 foreach (BankAccount account in _accountList)
                 {
-                    if (_inputAccount.CardNumber.Equals(account.CardNumber))
+                    if (bankAccountExist.CardNumber.Equals(account.CardNumber))
                     {
                         _selectedAccount = account;
 
-                        if (_inputAccount.PinCode.Equals(account.PinCode))
+                        if (bankAccountExist.PinCode.Equals(account.PinCode))
                         {
                             if (_selectedAccount.isLocked)
                                 BlockAccount();
