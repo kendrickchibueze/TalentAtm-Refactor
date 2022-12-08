@@ -11,7 +11,7 @@ using System.Transactions;
 namespace TalentAtm
 {
 
-     public delegate void BankAccountHandler(BankAccount account);
+     
     
     internal class Atm 
     {
@@ -33,61 +33,27 @@ namespace TalentAtm
 
         private static BankAccount _inputAccount;
 
-
+       
 
         
 
-        public event BankAccountHandler bankAccountExist;
-
-          
-        
-        
 
 
-        public  void AtmExecute()
+
+
+
+
+        WorkWithBankAccount workwith = new WorkWithBankAccount();
+
+
+
+
+        public void AtmExecute()
         {
 
+            EventHandlers eventhandlers = new EventHandlers();
 
-            //subscriber event handlers
-            void HandleOnBankAccountdetail(object sender, BankAccount bankAccount)
-            {
-                
-                Console.WriteLine("Handling bank detail verification...");
-
-            }
-
-
-            void HandleOnCheckBalance(object sender, BankAccount bankAccount)
-            {
-               
-                Console.WriteLine("Handling check balance...");
-            }
-
-
-            void HandleOnDeposit(object sender, BankAccount bankAccount)
-            {
-                Console.WriteLine("Handling deposit...");
-            }
-
-
-
-            void HandleOnWithdraw(object sender, BankAccount bankAccount)
-            {
-                Console.WriteLine("Handling withdrawal event...");
-            }
-
-            void HandleOnBlockBankAccount(object sender, BankAccount bankAccount)
-            {
-                Console.WriteLine("Blocking bank account...");
-            }
-
-
-            void HandleViewTransactions(object sender, BankAccount bankAccount)
-            {
-                Console.WriteLine("Viewing Transactions...");
-            }
-           WorkWithBankAccount workwith = new WorkWithBankAccount();
-
+            WorkWithBankAccount workwith = new WorkWithBankAccount();
 
             //initialization
             LangChoice.ChooseLang();
@@ -95,13 +61,14 @@ namespace TalentAtm
 
             while (true)
             {
-              
+               
                 switch (Utility.GetIntInputAmount(LangChoice.morechoice( LangChoice._option)))
                 {
                     case 1:
                         
-                        workwith.BankAccountdetail += HandleOnBankAccountdetail; // event and event handler in the subscriber class
+                        workwith.BankAccountdetail +=eventhandlers.HandleOnBankAccountdetail; // event and event handler in the subscriber class
                          verifyCardNumberPassword();
+                          
 
                         _listOfTransactions = new List<Transaction>();
 
@@ -133,7 +100,7 @@ namespace TalentAtm
 
                                     
 
-                                    workwith.BalanceCheck += HandleOnCheckBalance;  //event and event handler in the subscriber class
+                                    workwith.BalanceCheck += eventhandlers.HandleOnCheckBalance;  //event and event handler in the subscriber class
 
                                     CheckBalance(_selectedAccount);
 
@@ -141,7 +108,7 @@ namespace TalentAtm
 
                                 case (int)Menu.PlaceDeposit:
 
-                                    workwith.Deposit += HandleOnDeposit;   //event and event handler in the subscriber class
+                                    workwith.Deposit += eventhandlers.HandleOnDeposit;   //event and event handler in the subscriber class
 
                                     DepositMoney(_selectedAccount);
 
@@ -149,7 +116,7 @@ namespace TalentAtm
 
                                 case (int)Menu.MakeWithdrawal:
 
-                                    workwith.Withdraw += HandleOnWithdraw; //event and event handler in the subscriber class
+                                    workwith.Withdraw += eventhandlers.HandleOnWithdraw; //event and event handler in the subscriber class
                                     MakeWithdrawal(_selectedAccount);
 
                                     break;
@@ -167,7 +134,7 @@ namespace TalentAtm
                                 case (int)Menu.ViewTransaction:
 
                                     
-                                    workwith.viewingTransaction += HandleOnViewTransaction;
+                                   
                                     ViewTransaction(_selectedAccount);
 
                                     break;
@@ -279,13 +246,19 @@ namespace TalentAtm
             }
         }
          
-        public void verifyCardNumberPassword(BankAccount bankAccount) 
+        public void verifyCardNumberPassword() 
         {
+
+            EventHandlers eventhandlers = new EventHandlers();
+            WorkWithBankAccount workwith = new WorkWithBankAccount();
+
+
+
             while (!_passverification)
             {
-                //_inputAccount = new BankAccount();
+                _inputAccount = new BankAccount();
 
-                bankAccountExist(new BankAccount());
+                
 
                 switch (LangChoice._choice)
                 {
@@ -311,7 +284,7 @@ namespace TalentAtm
                 }
          
 
-                bankAccountExist.PinCode = int.Parse(Console.ReadLine());
+                _inputAccount.PinCode = int.Parse(Console.ReadLine());
 
                 switch (LangChoice._choice)
                 {
@@ -337,20 +310,24 @@ namespace TalentAtm
 
 
                 }
+                
+
+               workwith.OnBankAccountdetail( (int)_inputAccount.CardNumber,  _inputAccount.PinCode); //we use this method to notify subscribers ie event publisher method
+                  
 
                 foreach (BankAccount account in _accountList)
                 {
-                    if (bankAccountExist.CardNumber.Equals(account.CardNumber))
+                    if (_inputAccount.CardNumber.Equals(account.CardNumber))
                     {
                         _selectedAccount = account;
 
-                        if (bankAccountExist.PinCode.Equals(account.PinCode))
+                        if (_inputAccount.PinCode.Equals(account.PinCode))
                         {
                             if (_selectedAccount.isLocked) { 
 
-                                WorkWithBankAccount workwith = new WorkWithBankAccount();
+                             
 
-                                workwith.BlockBankAccount += HandleOnBlockBankAccount; //event and event handler in the subscriber class
+                                workwith.BlockBankAccount += eventhandlers.HandleOnBlockBankAccount; //event and event handler in the subscriber class
 
                                 BlockAccount();
                                 }
@@ -370,9 +347,9 @@ namespace TalentAtm
                             {
                                 _selectedAccount.isLocked = true;
 
-                                WorkWithBankAccount workwith = new WorkWithBankAccount();
+                               
 
-                                workwith.BlockBankAccount += HandleOnBlockBankAccount; //event and event handler in the subscriber class
+                                workwith.BlockBankAccount += eventhandlers.HandleOnBlockBankAccount; //event and event handler in the subscriber class
 
                                 BlockAccount();
                             }
@@ -404,12 +381,14 @@ namespace TalentAtm
 
                     }
             }
-            WorkWithBankAccount.OnBankAccountdetail(bankAccount.CardNumber, bankAccount.PinCode); //we use this method to notify subscribers
+            
         }
 
 
         public void CheckBalance(BankAccount bankAccount)
         {
+               workwith.OnCheckBalance(bankAccount);
+
             switch (LangChoice._choice)
             {
                 case 1:
@@ -430,7 +409,7 @@ namespace TalentAtm
 
             }
 
-            WorkWithBankAccount.OnCheckBalance(bankAccount);
+          
             
           
         }
@@ -439,10 +418,11 @@ namespace TalentAtm
         {
 
                _transactAmt = Utility.GetIntInputAmount("amount");
+            workwith.OnDeposit(account); //event publisher method
 
-              WorkWithBankAccount.OnDeposit(account); //event publisher method
 
-            
+
+
 
             switch (LangChoice._choice)
             {
@@ -576,6 +556,7 @@ namespace TalentAtm
                 }
 
             }
+            
 
            
         }
@@ -585,7 +566,7 @@ namespace TalentAtm
 
             _transactAmt = Utility.GetDecimalInputAmt("amount");
 
-            WorkWithBankAccount.OnWithdraw(_selectedAccount);
+         
 
             if (_transactAmt <= 0)
                 switch (LangChoice._choice)
@@ -711,39 +692,39 @@ namespace TalentAtm
 
                 
             }
+               workwith.OnWithdraw(_selectedAccount);
         }
 
         private void BlockAccount()
         {
-            WorkWithBankAccount.OnBlockBankAccount(true);  
-
+            bool istrue = workwith.OnBlockBankAccount(true);
 
             Console.Clear();
             switch (LangChoice._choice)
             {
                 case 1:
-                    Utility.PrintMessage("Your account is locked.", true);
+                    Utility.PrintMessage("Your account is locked.", istrue);
                     Utility.PrintColorMessage(ConsoleColor.Yellow, "Please go to the nearest branch to unlocked your account.");
                     Utility.PrintColorMessage(ConsoleColor.Yellow, "Thank you for using Talentbank. ");
                     Console.ReadKey();
                     Environment.Exit(1);
                     break;
                 case 2:
-                    Utility.PrintMessage("Akpochiri accountu gi.", true);
+                    Utility.PrintMessage("Akpochiri accountu gi.", istrue);
                     Utility.PrintColorMessage(ConsoleColor.Yellow, "Biko jee na branchi anyi di gi nso ka ikpoghe ya.");
                     Utility.PrintColorMessage(ConsoleColor.Yellow, "Ekele maka i bia Talent Bank. ");
                     Console.ReadKey();
                     Environment.Exit(1);
                     break;
                 case 3:
-                    Utility.PrintMessage("Your account dey locked.", true);
+                    Utility.PrintMessage("Your account dey locked.", istrue);
                     Utility.PrintColorMessage(ConsoleColor.Yellow, "Abeg go  nearest branch make you unlocked your account.");
                     Utility.PrintColorMessage(ConsoleColor.Yellow, "Thank you jaire for  using Talentbank. ");
                     Console.ReadKey();
                     Environment.Exit(1);
                     break;
                 default:
-                    Utility.PrintMessage("Your account is locked.", true);
+                    Utility.PrintMessage("Your account is locked.", istrue);
                     Utility.PrintColorMessage(ConsoleColor.Yellow, "Please go to the nearest branch to unlocked your account.");
                     Utility.PrintColorMessage(ConsoleColor.Yellow, "Thank you for using Talentbank. ");
                     Console.ReadKey();
@@ -752,6 +733,7 @@ namespace TalentAtm
 
 
             }
+           
          
             Environment.Exit(1);
         }
@@ -1011,7 +993,7 @@ namespace TalentAtm
         public void ViewTransaction(BankAccount bankAccount)
         {
 
-            WorkWithBankAccount.OnViewTransactions(BankAccount bankAccount);
+           // bankAccount = Workwith.OnViewTransactions( bankAccount);
 
             if (_listOfTransactions.Count <= 0)
                 switch (LangChoice._choice)

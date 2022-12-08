@@ -19,54 +19,70 @@ namespace TalentAtm
     }
 
 
-    public class WorkWithBankAccount
+    public  class WorkWithBankAccount
     {
         
 
-        public delegate void BankAccountdetailEventHandler(object sender, BankAccount bankAccount);
+        public delegate void BankAccountdetailEventHandler(object sender, BankAccount bankAccount); //the source and the data we are sending accross is the paraameters
 
         //Define another event to notify when the bank account  is blocked using built-in EventHandler delegate
 
-        public event EventHandler BlockBankAccount;
+        public   event BankAccountdetailEventHandler? BankAccountdetail; 
 
-        public event BankAccountdetailEventHandler BankAccountdetail;
+        //public event EventHandler<BankAccount> BankAccountdetail;
 
-        public event EventHandler BalanceCheck;
 
-        public event EventHandler Deposit;
+      public event EventHandler<BankAccount>? BlockBankAccount;
 
-        public event EventHandler Withdraw;
 
-        public event EventHandler viewingTransaction;
+
+
+
+        public event EventHandler<BankAccount>? BalanceCheck;
+
+        public event EventHandler<BankAccount>? Deposit;
+
+        public event EventHandler<BankAccount>? Withdraw;
+
+        public event EventHandler<BankAccount>? viewingTransaction;
        
             
           
 
-           protected virtual void OnBankAccountdetail(int pincode, Int64 cardNumber)
+           public void OnBankAccountdetail(int pincode, Int64 cardNumber)
            {
 
-                BankAccountdetail?.Invoke(this, new BankAccount() {
+            BankAccount bankAccount =  new BankAccount();
+            bankAccount.CardNumber = cardNumber;
+            bankAccount.PinCode = pincode;
+
+
+            BankAccountdetail?.Invoke(this, bankAccount);
+
+
+
+                /*BankAccountdetail?.Invoke(this, new BankAccount() {
                     CardNumber = cardNumber,
                     PinCode = pincode
                     
                 
                 
-                });
+                });*/
 
            
           
 
            }
 
-        protected virtual void OnViewTransactions(BankAccount bankAccount)
+        /*public void OnViewTransactions(BankAccount bankAccount)
         {
             viewingTransaction?.Invoke(this, new BankAccount()
             {
                 AccountNumber = bankAccount.AccountNumber
             });
-        }
+        }*/
 
-          protected virtual void OnCheckBalance(BankAccount bankAccount)
+          public void OnCheckBalance(BankAccount bankAccount)
            {
             BalanceCheck?.Invoke(this, new BankAccount() { Balance = bankAccount.Balance});
 
@@ -75,7 +91,7 @@ namespace TalentAtm
            }
 
 
-           protected virtual void OnDeposit(BankAccount bankAccount)
+           public void OnDeposit(BankAccount bankAccount)
            {
 
                 Deposit?.Invoke(this, new BankAccount() { 
@@ -87,7 +103,7 @@ namespace TalentAtm
 
            }
 
-        protected virtual void OnWithdraw(BankAccount bankAccount)
+        public void OnWithdraw(BankAccount bankAccount)
         {
             Withdraw?.Invoke(this, new BankAccount() {
             AccountNumber = bankAccount.AccountNumber,
@@ -96,7 +112,7 @@ namespace TalentAtm
 
         }
 
-         protected virtual void OnBlockBankAccount(bool isLocked)
+         public bool OnBlockBankAccount(bool isLocked)
           {
 
             //Raising Events only if Listeners are attached
@@ -105,6 +121,7 @@ namespace TalentAtm
                 {
                     isLocked = true,
                 });
+            return isLocked;
           
 
           }
