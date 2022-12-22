@@ -136,7 +136,7 @@ namespace TalentAtm
 
                                     Transfer = Screen.TransferMoney();
 
-                                    //performTransfer(_selectedAccount, Transfer);
+                                    performTransfer(WorkWithBankAccount._selectedAccount, Transfer);
 
                                     break;
 
@@ -144,7 +144,7 @@ namespace TalentAtm
 
 
 
-                                    //ViewTransaction(_selectedAccount);
+                                    ViewTransaction(WorkWithBankAccount._selectedAccount);
 
                                     break;
 
