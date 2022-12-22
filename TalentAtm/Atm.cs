@@ -15,23 +15,23 @@ namespace TalentAtm
 
     internal  class Atm
     {
-        //private static int _tries;
+        private static int _tries;
 
-        //public const int _maxTries = 3;
+        public const int _maxTries = 3;
 
         private const decimal _minimumKeptAmount = 10;
 
         public static decimal _transactAmt;
 
-        //public static bool _passverification;
+       public static bool _passverification;
 
-        //private static List<BankAccount> _accountList;
+        private static List<BankAccount> _accountList;
 
         private static List<Transaction> _listOfTransactions;
 
-        //private static BankAccount _selectedAccount;
+        
 
-        private static Deposit _selectedDeposit;
+       
 
 
 
