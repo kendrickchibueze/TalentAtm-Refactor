@@ -628,262 +628,262 @@ namespace TalentAtm
 
         }
 
-        //public void performTransfer(BankAccount bankAccount, VmTransfer Transfer)
-        //{
-        //    if (Transfer.TransferAmount <= 0)
-        //        switch (LangChoice._choice)
-        //        {
-        //            case 1:
-        //                Utility.PrintMessage("Amount needs to be more than zero. Try again.", false);
-        //                break;
-        //            case 2:
-        //                Utility.PrintMessage("Ego ina-etinye ga akariri zero. megharia ya.", false);
-        //                break;
-        //            case 3:
-        //                Utility.PrintMessage("The amount wey you put suppose pass zero. Try am again.", false);
-        //                break;
-        //            default:
-        //                Utility.PrintMessage("Amount needs to be more than zero. Try again.", false);
-        //                break;
+        public void performTransfer(BankAccount bankAccount, VmTransfer Transfer)
+        {
+            if (Transfer.TransferAmount <= 0)
+                switch (LangChoice._choice)
+                {
+                    case 1:
+                        Utility.PrintMessage("Amount needs to be more than zero. Try again.", false);
+                        break;
+                    case 2:
+                        Utility.PrintMessage("Ego ina-etinye ga akariri zero. megharia ya.", false);
+                        break;
+                    case 3:
+                        Utility.PrintMessage("The amount wey you put suppose pass zero. Try am again.", false);
+                        break;
+                    default:
+                        Utility.PrintMessage("Amount needs to be more than zero. Try again.", false);
+                        break;
 
 
-        //        }
+                }
 
 
-        //    else if (Transfer.TransferAmount > bankAccount.Balance)
+            else if (Transfer.TransferAmount > bankAccount.Balance)
 
-        //        // Check giver's account balance - Start
-        //        switch (LangChoice._choice)
-        //        {
-        //            case 1:
-        //                Utility.PrintMessage($"Transfer failed. You do not have enough fund to transfer {Utility.FormatAmount(_transactAmt)}", false);
-        //                break;
-        //            case 2:
-        //                Utility.PrintMessage($" i transfer ego gi agaro niru. i nwezuro ego inye mmadu {Utility.FormatAmount(_transactAmt)}", false);
-        //                break;
-        //            case 3:
-        //                Utility.PrintMessage($"Transfer failed. you no get enough money wey go fund transfer {Utility.FormatAmount(_transactAmt)}", false);
-        //                break;
-        //            default:
-        //                Utility.PrintMessage($"Transfer failed. You do not have enough fund to transfer {Utility.FormatAmount(_transactAmt)}", false);
-        //                break;
-
-
-        //        }
+                // Check giver's account balance - Start
+                switch (LangChoice._choice)
+                {
+                    case 1:
+                        Utility.PrintMessage($"Transfer failed. You do not have enough fund to transfer {Utility.FormatAmount(_transactAmt)}", false);
+                        break;
+                    case 2:
+                        Utility.PrintMessage($" i transfer ego gi agaro niru. i nwezuro ego inye mmadu {Utility.FormatAmount(_transactAmt)}", false);
+                        break;
+                    case 3:
+                        Utility.PrintMessage($"Transfer failed. you no get enough money wey go fund transfer {Utility.FormatAmount(_transactAmt)}", false);
+                        break;
+                    default:
+                        Utility.PrintMessage($"Transfer failed. You do not have enough fund to transfer {Utility.FormatAmount(_transactAmt)}", false);
+                        break;
 
 
-        //    else if ((bankAccount.Balance - Transfer.TransferAmount) < 10)
-        //        switch (LangChoice._choice)
-        //        {
-        //            case 1:
-        //                Utility.PrintMessage($"Transfer failed. Your account needs to have minimum of {Utility.FormatAmount(_minimumKeptAmount)}", false);
-        //                break;
-        //            case 2:
-        //                Utility.PrintMessage($"i transfer ego gi agaro niru. account gi kwesiri inweriri opekata mpe {Utility.FormatAmount(_minimumKeptAmount)}", false);
-        //                break;
-        //            case 3:
-        //                Utility.PrintMessage($"Transfer failed. you suppose get upto  {Utility.FormatAmount(_minimumKeptAmount)}", false);
-        //                break;
-        //            default:
-        //                Utility.PrintMessage($"Transfer failed. Your account needs to have minimum of {Utility.FormatAmount(_minimumKeptAmount)}", false);
-        //                break;
+                }
 
 
-        //        }
-
-        //    // Check giver's account balance - End
-
-        //    else
-        //    {
-        //        // Check if receiver's bank account number is valid.
-
-        //        var selectedBankAccountReceiver = (from b in _accountList
-        //                                           where b.AccountNumber == Transfer.RecipientBankAccountNumber
-        //                                           select b).FirstOrDefault(); //FirstOrDefault returns the first element of a sequence or default element if the sequence contains no element
-
-        //        if (selectedBankAccountReceiver == null)
-
-        //            switch (LangChoice._choice)
-        //            {
-        //                case 1:
-        //                    Utility.PrintMessage($" Money Transfer failed. Receiver bank account number is invalid.", false);
-        //                    break;
-        //                case 2:
-        //                    Utility.PrintMessage($" i transfer ego gi agaro niru. Accountu nomba onye i choro ihe ego adiro ka okwesiri.", false);
-        //                    break;
-        //                case 3:
-        //                    Utility.PrintMessage($" Money Transfer don fail. Receiver bank account number no dey invalid.", false);
-        //                    break;
-        //                default:
-        //                    Utility.PrintMessage($" Money Transfer failed. Receiver bank account number is invalid.", false);
-        //                    break;
+            else if ((bankAccount.Balance - Transfer.TransferAmount) < 10)
+                switch (LangChoice._choice)
+                {
+                    case 1:
+                        Utility.PrintMessage($"Transfer failed. Your account needs to have minimum of {Utility.FormatAmount(_minimumKeptAmount)}", false);
+                        break;
+                    case 2:
+                        Utility.PrintMessage($"i transfer ego gi agaro niru. account gi kwesiri inweriri opekata mpe {Utility.FormatAmount(_minimumKeptAmount)}", false);
+                        break;
+                    case 3:
+                        Utility.PrintMessage($"Transfer failed. you suppose get upto  {Utility.FormatAmount(_minimumKeptAmount)}", false);
+                        break;
+                    default:
+                        Utility.PrintMessage($"Transfer failed. Your account needs to have minimum of {Utility.FormatAmount(_minimumKeptAmount)}", false);
+                        break;
 
 
-        //            }
+                }
+
+            // Check giver's account balance - End
+
+            else
+            {
+                // Check if receiver's bank account number is valid.
+
+                var selectedBankAccountReceiver = (from b in _accountList
+                                                   where b.AccountNumber == Transfer.RecipientBankAccountNumber
+                                                   select b).FirstOrDefault(); //FirstOrDefault returns the first element of a sequence or default element if the sequence contains no element
+
+                if (selectedBankAccountReceiver == null)
+
+                    switch (LangChoice._choice)
+                    {
+                        case 1:
+                            Utility.PrintMessage($" Money Transfer failed. Receiver bank account number is invalid.", false);
+                            break;
+                        case 2:
+                            Utility.PrintMessage($" i transfer ego gi agaro niru. Accountu nomba onye i choro ihe ego adiro ka okwesiri.", false);
+                            break;
+                        case 3:
+                            Utility.PrintMessage($" Money Transfer don fail. Receiver bank account number no dey invalid.", false);
+                            break;
+                        default:
+                            Utility.PrintMessage($" Money Transfer failed. Receiver bank account number is invalid.", false);
+                            break;
 
 
-
-        //        else if (selectedBankAccountReceiver.FullName != Transfer.RecipientBankAccountName)
-
-        //            switch (LangChoice._choice)
-        //            {
-        //                case 1:
-        //                    Utility.PrintMessage($"Transfer failed. Recipient's account name does not match.", false);
-        //                    break;
-        //                case 2:
-        //                    Utility.PrintMessage($" i transfer ego gi agaro niru. Ahughi aha accountu onye i na-enye ego .", false);
-        //                    break;
-        //                case 3:
-        //                    Utility.PrintMessage($"Transfer don fail. Recipient's account name no match.", false);
-        //                    break;
-        //                default:
-        //                    Utility.PrintMessage($"Transfer failed. Recipient's account name does not match.", false);
-        //                    break;
-
-
-        //            }
+                    }
 
 
 
-        //        else
-        //        {
+                else if (selectedBankAccountReceiver.FullName != Transfer.RecipientBankAccountName)
 
-        //            // Bind transaction_amt to Transaction object
-        //            // Add transaction record - Start
-
-        //            Transaction transaction = new Transaction()
-        //            {
-        //                BankAccountNoFrom = bankAccount.AccountNumber,
-
-        //                BankAccountNoTo = Transfer.RecipientBankAccountNumber,
-
-        //                TransactionType = TransactionType.Transfer,
-
-        //                TransactionAmount = Transfer.TransferAmount,
-
-        //                TransactionDate = DateTime.Now
-        //            };
-
-        //            _listOfTransactions.Add(transaction);
-
-        //            switch (LangChoice._choice)
-        //            {
-        //                case 1:
-        //                    Utility.PrintMessage($"You have successfully transferred out {Utility.FormatAmount(Transfer.TransferAmount)} to {Transfer.RecipientBankAccountName}", true);
-        //                    break;
-        //                case 2:
-        //                    Utility.PrintMessage($"Transfer gi gara nke oma, i nyere {Utility.FormatAmount(Transfer.TransferAmount)} to {Transfer.RecipientBankAccountName}", true);
-        //                    break;
-        //                case 3:
-        //                    Utility.PrintMessage($"You don successfully transfer out {Utility.FormatAmount(Transfer.TransferAmount)} to {Transfer.RecipientBankAccountName}", true);
-        //                    break;
-        //                default:
-        //                    Utility.PrintMessage($"You have successfully transferred out {Utility.FormatAmount(Transfer.TransferAmount)} to {Transfer.RecipientBankAccountName}", true);
-        //                    break;
+                    switch (LangChoice._choice)
+                    {
+                        case 1:
+                            Utility.PrintMessage($"Transfer failed. Recipient's account name does not match.", false);
+                            break;
+                        case 2:
+                            Utility.PrintMessage($" i transfer ego gi agaro niru. Ahughi aha accountu onye i na-enye ego .", false);
+                            break;
+                        case 3:
+                            Utility.PrintMessage($"Transfer don fail. Recipient's account name no match.", false);
+                            break;
+                        default:
+                            Utility.PrintMessage($"Transfer failed. Recipient's account name does not match.", false);
+                            break;
 
 
-        //          }
+                    }
 
 
-        //            // Add transaction record - End
 
-        //            // Update balance amount (Giver)
-        //            bankAccount.Balance = bankAccount.Balance - Transfer.TransferAmount;
+                else
+                {
 
-        //            // Update balance amount (Receiver)
-        //            selectedBankAccountReceiver.Balance = selectedBankAccountReceiver.Balance + Transfer.TransferAmount;
-        //        }
-        //    }
+                    // Bind transaction_amt to Transaction object
+                    // Add transaction record - Start
 
-        //}
+                    Transaction transaction = new Transaction()
+                    {
+                        BankAccountNoFrom = bankAccount.AccountNumber,
 
+                        BankAccountNoTo = Transfer.RecipientBankAccountNumber,
 
-        //public void ViewTransaction(BankAccount bankAccount)
-        //{
+                        TransactionType = TransactionType.Transfer,
 
-        //   // bankAccount = Workwith.OnViewTransactions( bankAccount);
+                        TransactionAmount = Transfer.TransferAmount,
 
-        //    if (_listOfTransactions.Count <= 0)
-        //        switch (LangChoice._choice)
-        //        {
-        //            case 1:
-        //                Utility.PrintMessage($"There is no transaction yet.", true);
-        //                break;
-        //            case 2:
-        //                Utility.PrintMessage($"Imebeghi transactionu.", true);
-        //                break;
-        //            case 3:
-        //                Utility.PrintMessage($"you no get transaction.", true);
-        //                break;
-        //            default:
-        //                Utility.PrintMessage($"There is no transaction yet.", true);
-        //                break;
+                        TransactionDate = DateTime.Now
+                    };
 
+                    _listOfTransactions.Add(transaction);
 
-        //        }
-
-        //    else
-        //    {
-
-        //        foreach (var trans in _listOfTransactions)
-        //        {
-
-        //            switch (LangChoice._choice)
-        //            {
-        //                case 1:
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Type is {trans.TransactionType} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The Sender BankAccount No is {trans.BankAccountNoFrom} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The Receipient BankAccount No is {trans.BankAccountNoTo} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Amount is ${trans.TransactionAmount} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Date is {trans.TransactionDate} ");
-        //                    break;
-        //                case 2:
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"Taipu transaction gi bu {trans.TransactionType} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"Accountu nomba onye na-enye enye bu{trans.BankAccountNoFrom} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"Accountu nomba onye na-anara anara bu {trans.BankAccountNoTo} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"Ego ana transacti bu ${trans.TransactionAmount} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"Deeti Eji mee ya bu {trans.TransactionDate} ");
-        //                    break;
-        //                case 3:
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Type be {trans.TransactionType} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"Bank Account no of the  person wey dey Send  be {trans.BankAccountNoFrom} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"Bank Account no of the  person wey dey receive  be {trans.BankAccountNoTo} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"una transaction Amount be ${trans.TransactionAmount} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Date be {trans.TransactionDate} ");
-        //                    break;
-        //                default:
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Type is {trans.TransactionType} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The Sender BankAccount No is {trans.BankAccountNoFrom} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The Receipient BankAccount No is {trans.BankAccountNoTo} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Amount is {trans.TransactionAmount} ");
-        //                    Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Date is {trans.TransactionDate} ");
-        //                    break;
+                    switch (LangChoice._choice)
+                    {
+                        case 1:
+                            Utility.PrintMessage($"You have successfully transferred out {Utility.FormatAmount(Transfer.TransferAmount)} to {Transfer.RecipientBankAccountName}", true);
+                            break;
+                        case 2:
+                            Utility.PrintMessage($"Transfer gi gara nke oma, i nyere {Utility.FormatAmount(Transfer.TransferAmount)} to {Transfer.RecipientBankAccountName}", true);
+                            break;
+                        case 3:
+                            Utility.PrintMessage($"You don successfully transfer out {Utility.FormatAmount(Transfer.TransferAmount)} to {Transfer.RecipientBankAccountName}", true);
+                            break;
+                        default:
+                            Utility.PrintMessage($"You have successfully transferred out {Utility.FormatAmount(Transfer.TransferAmount)} to {Transfer.RecipientBankAccountName}", true);
+                            break;
 
 
-        //            }
-
-        //        }
-        //        switch (LangChoice._choice)
-        //        {
-        //            case 1:
-        //                Utility.PrintMessage($"You have performed {_listOfTransactions.Count} transactions.", true);
-        //                break;
-        //            case 2:
-        //                Utility.PrintMessage($"I mere  {_listOfTransactions.Count} transacshonus.", true);
-        //                break;
-        //            case 3:
-        //                Utility.PrintMessage($"You  don perform upto {_listOfTransactions.Count} transactions.", true);
-        //                break;
-        //            default:
-        //                Utility.PrintMessage($"You have performed {_listOfTransactions.Count} transactions.", true);
-        //                break;
+                    }
 
 
-        //        }
+                    // Add transaction record - End
+
+                    // Update balance amount (Giver)
+                    bankAccount.Balance = bankAccount.Balance - Transfer.TransferAmount;
+
+                    // Update balance amount (Receiver)
+                    selectedBankAccountReceiver.Balance = selectedBankAccountReceiver.Balance + Transfer.TransferAmount;
+                }
+            }
+
+        }
 
 
-        //    }
-        //}
+        public void ViewTransaction(BankAccount bankAccount)
+        {
+
+            // bankAccount = Workwith.OnViewTransactions( bankAccount);
+
+            if (_listOfTransactions.Count <= 0)
+                switch (LangChoice._choice)
+                {
+                    case 1:
+                        Utility.PrintMessage($"There is no transaction yet.", true);
+                        break;
+                    case 2:
+                        Utility.PrintMessage($"Imebeghi transactionu.", true);
+                        break;
+                    case 3:
+                        Utility.PrintMessage($"you no get transaction.", true);
+                        break;
+                    default:
+                        Utility.PrintMessage($"There is no transaction yet.", true);
+                        break;
+
+
+                }
+
+            else
+            {
+
+                foreach (var trans in _listOfTransactions)
+                {
+
+                    switch (LangChoice._choice)
+                    {
+                        case 1:
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Type is {trans.TransactionType} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The Sender BankAccount No is {trans.BankAccountNoFrom} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The Receipient BankAccount No is {trans.BankAccountNoTo} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Amount is ${trans.TransactionAmount} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Date is {trans.TransactionDate} ");
+                            break;
+                        case 2:
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"Taipu transaction gi bu {trans.TransactionType} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"Accountu nomba onye na-enye enye bu{trans.BankAccountNoFrom} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"Accountu nomba onye na-anara anara bu {trans.BankAccountNoTo} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"Ego ana transacti bu ${trans.TransactionAmount} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"Deeti Eji mee ya bu {trans.TransactionDate} ");
+                            break;
+                        case 3:
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Type be {trans.TransactionType} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"Bank Account no of the  person wey dey Send  be {trans.BankAccountNoFrom} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"Bank Account no of the  person wey dey receive  be {trans.BankAccountNoTo} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"una transaction Amount be ${trans.TransactionAmount} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Date be {trans.TransactionDate} ");
+                            break;
+                        default:
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Type is {trans.TransactionType} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The Sender BankAccount No is {trans.BankAccountNoFrom} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The Receipient BankAccount No is {trans.BankAccountNoTo} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Amount is {trans.TransactionAmount} ");
+                            Utility.PrintColorMessage(ConsoleColor.Yellow, $"The transaction Date is {trans.TransactionDate} ");
+                            break;
+
+
+                    }
+
+                }
+                switch (LangChoice._choice)
+                {
+                    case 1:
+                        Utility.PrintMessage($"You have performed {_listOfTransactions.Count} transactions.", true);
+                        break;
+                    case 2:
+                        Utility.PrintMessage($"I mere  {_listOfTransactions.Count} transacshonus.", true);
+                        break;
+                    case 3:
+                        Utility.PrintMessage($"You  don perform upto {_listOfTransactions.Count} transactions.", true);
+                        break;
+                    default:
+                        Utility.PrintMessage($"You have performed {_listOfTransactions.Count} transactions.", true);
+                        break;
+
+
+                }
+
+
+            }
+        }
 
     }
 }
