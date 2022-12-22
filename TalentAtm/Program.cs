@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             Atm atm = new Atm();
-            atm.SeedData();
+            //atm.SeedData();
             atm.AtmExecute();
         }
     }
